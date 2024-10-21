@@ -146,10 +146,65 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin-top: 4rem;
+  margin-block: 4rem;
 }
 
 .game-title {
   font-size: 2rem;
   font-weight: bold;
+}
+
+.game-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#cell-0 {
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+#cell-1 {
+  border-bottom: 1px solid white;
+}
+
+#cell-2 {
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+#cell-3 {
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+#cell-4 {
+  border-bottom: 1px solid white;
+}
+
+#cell-5 {
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+}
+
+#cell-7 {
+  border-right: 1px solid white;
+}
+
+#cell-8 {
+  border-right: 1px solid white;
 }
