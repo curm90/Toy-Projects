@@ -69,3 +69,7 @@ function restartGame() {
   currentPlayer = players[0];
   messageEl.textContent = "Player X's turn";
 }
+
+for (cell of cells) {
+  cell.addEventListener('click', handleCellClick);
+}
