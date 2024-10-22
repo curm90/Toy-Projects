@@ -1,5 +1,6 @@
 const cells = document.querySelectorAll('.cell');
 const messageEl = document.querySelector('.message');
+
 const players = ['X', '0'];
 let currentPlayer = players[0];
 const winningCombinations = [
