@@ -223,7 +223,7 @@ body {
 }
 
 .reset-button {
-  background: #6b7280;
+  background: #6194ed;
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -231,4 +231,10 @@ body {
   border-radius: 0.5rem;
   cursor: pointer;
   margin-top: 2rem;
+  transition: all 0.2s ease-out;
+}
+
+.reset-button:hover {
+  background: #74a4f7;
+  transition: all 0.2s ease-in;
 }
