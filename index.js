@@ -31,3 +31,11 @@ function checkIfWin(player) {
 function checkIfDraw() {
   return [...cells].every((cell) => cell.textContent !== '');
 }
+
+function restartGame() {
+  cells.forEach((cell) => {
+    cell.textContent = '';
+  });
+  currentPlayer = players[0];
+  messageEl.textContent = "Player X's turn";
+}
