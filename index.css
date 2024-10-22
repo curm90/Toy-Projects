@@ -179,6 +179,7 @@ body {
   align-items: center;
   color: white;
   font-size: 8rem;
+  cursor: pointer;
 }
 
 #cell-0 {

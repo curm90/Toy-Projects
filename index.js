@@ -14,6 +14,13 @@ const winningCombinations = [
   [2, 4, 6],
 ];
 
+function highlightWinningCells(cellsArray) {
+  cellsArray.forEach((index) => {
+    cells[index].style.color = 'green';
+    cells[index].style.opacity = '0.7';
+  });
+}
+
 function checkIfWin(player) {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
@@ -23,6 +30,7 @@ function checkIfWin(player) {
       cells[b].textContent === player &&
       cells[c].textContent === player
     ) {
+      highlightWinningCells(combination);
       return true;
     }
   }
@@ -66,7 +74,10 @@ function handleCellClick(e) {
 function restartGame() {
   cells.forEach((cell) => {
     cell.textContent = '';
+    cell.style.opacity = '';
+    cell.style.color = '';
   });
+
   currentPlayer = players[0];
   messageEl.textContent = "Player X's turn";
 }
