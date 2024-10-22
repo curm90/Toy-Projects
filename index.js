@@ -32,6 +32,36 @@ function checkIfDraw() {
   return [...cells].every((cell) => cell.textContent !== '');
 }
 
+function handleCellClick(e) {
+  const cell = e.target;
+
+  if (cell.textContent !== '') {
+    return;
+  }
+
+  cell.textContent = currentPlayer;
+
+  if (checkIfWin(currentPlayer)) {
+    messageEl.textContent = `Player ${currentPlayer} wins!`;
+
+    cells.forEach((cell) => {
+      if (cell.textContent === '') {
+        cell.removeEventListener('click', handleCellClick);
+        cell.style.cursor = 'not-allowed';
+      }
+    });
+    return;
+  }
+
+  if (checkIfDraw()) {
+    messageEl.textContent = 'Draw!';
+    return;
+  }
+
+  currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
+  messageEl.textContent = `Player ${currentPlayer}'s turn.`;
+}
+
 function restartGame() {
   cells.forEach((cell) => {
     cell.textContent = '';
