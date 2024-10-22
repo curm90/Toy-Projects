@@ -12,6 +12,7 @@ const winningCombinations = [
   [0, 4, 8],
   [2, 4, 6],
 ];
+
 function checkIfWin(player) {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
@@ -25,4 +26,8 @@ function checkIfWin(player) {
     }
   }
   return false;
+}
+
+function checkIfDraw() {
+  return [...cells].every((cell) => cell.textContent !== '');
 }
