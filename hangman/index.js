@@ -28,10 +28,14 @@ for (const letter of alphabet) {
 const allKeys = document.querySelectorAll('.key');
 
 livesRemaining.textContent = numberOfGuesses;
-wordHolder.textContent = testWord
-  .split('')
-  .map(() => '_')
-  .join(' ');
+addWordToWordHolder(testWord);
+
+function addWordToWordHolder(word) {
+  wordHolder.textContent = word
+    .split('')
+    .map(() => '_')
+    .join(' ');
+}
 
 function checkIfGuessIsCorrect(guess, word) {
   return word.includes(guess);
@@ -56,12 +60,6 @@ function handleWin() {
 }
 
 function handleGuess(guess, word) {
-  if (numberOfGuesses === 0) {
-    gameText.textContent = 'Game over!';
-    disableAllKeys();
-    return;
-  }
-
   if (checkIfGuessIsCorrect(guess, word)) {
     const updatedWord = word
       .split('')
@@ -83,6 +81,12 @@ function handleGuess(guess, word) {
     // TODO: Disable guessed key and draw a part of the hangman
     numberOfGuesses--;
     livesRemaining.textContent = numberOfGuesses;
+
+    if (numberOfGuesses < 1) {
+      gameText.textContent = 'Game over!';
+      disableAllKeys();
+      return;
+    }
   }
 }
 
@@ -97,10 +101,7 @@ for (const key of allKeys) {
 function resetGame() {
   numberOfGuesses = 9;
   livesRemaining.textContent = numberOfGuesses;
-  wordHolder.textContent = testWord
-    .split('')
-    .map(() => '_')
-    .join(' ');
+  addWordToWordHolder(testWord);
 
   gameText.textContent = '';
   [...allKeys].map((key) => {
