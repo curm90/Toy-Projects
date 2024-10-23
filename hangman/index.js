@@ -1,10 +1,20 @@
-let NumberOfGuesses = 9;
-const testWord = 'development';
+// import { getRandomWordAny } from './data.js';
+
+let numberOfGuesses = 9;
+const testWord = 'test';
+// const { word: testWord, category, difficulty } = getRandomWordAny();
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 const keyboardList = document.querySelector('.list');
 const livesRemaining = document.querySelector('.lives-remaining');
 const wordHolder = document.querySelector('.word-holder');
+// const categoryName = document.querySelector('.category-name');
+// const difficultyName = document.querySelector('.difficulty-name');
+const gameText = document.querySelector('.game-text');
+const newGameBtn = document.querySelector('.new-game');
+
+// categoryName.textContent = category;
+// difficultyName.textContent = difficulty;
 
 for (const letter of alphabet) {
   const list = document.createElement('li');
@@ -17,18 +27,41 @@ for (const letter of alphabet) {
 
 const allKeys = document.querySelectorAll('.key');
 
-livesRemaining.textContent = NumberOfGuesses;
+livesRemaining.textContent = numberOfGuesses;
 wordHolder.textContent = testWord
   .split('')
   .map(() => '_')
   .join(' ');
 
 function checkIfGuessIsCorrect(guess, word) {
-  console.log(guess, word);
   return word.includes(guess);
 }
 
+function checkIfWordIsGuessedCorrectly(word) {
+  const fullWord = word.split(' ').join('');
+  console.log(fullWord, testWord);
+  return fullWord === testWord;
+}
+
+function disableAllKeys() {
+  [...allKeys].map((key) => {
+    key.style.cursor = 'not-allowed';
+    key.disabled = true;
+  });
+}
+
+function handleWin() {
+  gameText.textContent = 'Congratulations! You won! 🎉';
+  disableAllKeys();
+}
+
 function handleGuess(guess, word) {
+  if (numberOfGuesses === 0) {
+    gameText.textContent = 'Game over!';
+    disableAllKeys();
+    return;
+  }
+
   if (checkIfGuessIsCorrect(guess, word)) {
     const updatedWord = word
       .split('')
@@ -40,11 +73,16 @@ function handleGuess(guess, word) {
         }
       })
       .join(' ');
+
     wordHolder.textContent = updatedWord;
+
+    if (checkIfWordIsGuessedCorrectly(updatedWord)) {
+      handleWin();
+    }
   } else {
     // TODO: Disable guessed key and draw a part of the hangman
-    NumberOfGuesses--;
-    livesRemaining.textContent = NumberOfGuesses;
+    numberOfGuesses--;
+    livesRemaining.textContent = numberOfGuesses;
   }
 }
 
@@ -55,3 +93,20 @@ for (const key of allKeys) {
     key.style.cursor = 'not-allowed';
   });
 }
+
+function resetGame() {
+  numberOfGuesses = 9;
+  livesRemaining.textContent = numberOfGuesses;
+  wordHolder.textContent = testWord
+    .split('')
+    .map(() => '_')
+    .join(' ');
+
+  gameText.textContent = '';
+  [...allKeys].map((key) => {
+    key.disabled = false;
+    key.style.cursor = 'pointer';
+  });
+}
+
+newGameBtn.addEventListener('click', resetGame);
