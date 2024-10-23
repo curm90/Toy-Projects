@@ -189,6 +189,10 @@ main {
   cursor: pointer;
 }
 
+.game-text {
+  font-size: 3rem;
+}
+
 .drawing {
   display: flex;
   align-items: center;
@@ -209,6 +213,7 @@ main {
   border: 1px solid #fff;
   color: #fff;
   width: 18rem;
+  font-size: 2rem;
 
   &:hover {
     background-color: #fff;
@@ -226,6 +231,7 @@ main {
   display: flex;
   gap: 1rem;
   text-transform: uppercase;
+  margin-top: 4rem;
 }
 
 .lives {
