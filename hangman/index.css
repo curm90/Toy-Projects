@@ -138,4 +138,97 @@ html {
 
 body {
   font-size: 1.6rem;
+  background: linear-gradient(to right, #1e3c72, #2a5298);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-block: 4rem;
+  color: #fff;
+  margin-inline: 3rem;
+}
+
+#game-container {
+  margin: 0 auto;
+  max-width: 100rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.intro-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  .title {
+    font-size: 4rem;
+    text-transform: uppercase;
+  }
+}
+
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.key {
+  padding: 1rem;
+  width: 5rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.drawing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  border: 1px solid #fff;
+  width: 30rem;
+  height: 20rem;
+  margin-block: 2rem;
+}
+
+.game-control-btn {
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+  width: 18rem;
+
+  &:hover {
+    background-color: #fff;
+    color: #1e3c72;
+  }
+}
+
+.category {
+  font-size: 2rem;
+  margin-block: 2em;
+}
+
+.guessed-word {
+  font-size: 2rem;
+  display: flex;
+  gap: 1rem;
+  text-transform: uppercase;
+}
+
+.lives {
+  font-size: 2rem;
+  margin-block: 2rem;
 }

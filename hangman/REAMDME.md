@@ -2,31 +2,31 @@
 
 ## Project Setup
 
-- [ ] Create project directory structure
-- [ ] Initialize Git repository
-- [ ] Create index.html, styles.css, and script.js files
-- [ ] Link files together
-- [ ] Test initial setup
+- [x] Create project directory structure
+- [x] Initialize Git repository
+- [x] Create index.html, styles.css, and script.js files
+- [x] Link files together
+- [x] Test initial setup
 
 ## HTML Structure
 
-- [ ] Create game container
-- [ ] Add hangman drawing area
-- [ ] Create word display section
-- [ ] Add used letters display
-- [ ] Implement virtual keyboard
-- [ ] Add score/status section
-- [ ] Create game controls (New Game, etc.)
+- [x] Create game container
+- [x] Add hangman drawing area
+- [x] Create word display section
+- [x] Add used letters display
+- [x] Implement virtual keyboard
+- [x] Add score/status section
+- [x] Create game controls (New Game, etc.)
 
 ## CSS Styling
 
-- [ ] Style game container and layout
-- [ ] Design word display (underscores/letters)
-- [ ] Style virtual keyboard buttons
+- [x] Style game container and layout
+- [x] Design word display (underscores/letters)
+- [x] Style virtual keyboard buttons
 - [ ] Create hangman figure states
 - [ ] Add responsive design
 - [ ] Implement animations
-- [ ] Style game status elements
+- [x] Style game status elements
 
 ## JavaScript Game Logic
 
