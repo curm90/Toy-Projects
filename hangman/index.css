@@ -221,8 +221,8 @@ main {
   margin-block: 2em;
 }
 
-.guessed-word {
-  font-size: 2rem;
+.word-holder {
+  font-size: 4rem;
   display: flex;
   gap: 1rem;
   text-transform: uppercase;
