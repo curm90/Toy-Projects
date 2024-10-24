@@ -1,20 +1,20 @@
-// import { getRandomWordAny } from './data.js';
+import { getRandomWordAny } from './data.js';
 
 let numberOfGuesses = 9;
-const testWord = 'test';
-// const { word: testWord, category, difficulty } = getRandomWordAny();
+// const testWord = 'test';
+let { word: testWord, category, difficulty } = getRandomWordAny();
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 const keyboardList = document.querySelector('.list');
 const livesRemaining = document.querySelector('.lives-remaining');
 const wordHolder = document.querySelector('.word-holder');
-// const categoryName = document.querySelector('.category-name');
-// const difficultyName = document.querySelector('.difficulty-name');
+const categoryName = document.querySelector('.category-name');
+const difficultyName = document.querySelector('.difficulty-name');
 const gameText = document.querySelector('.game-text');
 const newGameBtn = document.querySelector('.new-game');
 
-// categoryName.textContent = category;
-// difficultyName.textContent = difficulty;
+categoryName.textContent = category;
+difficultyName.textContent = difficulty;
 
 for (const letter of alphabet) {
   const list = document.createElement('li');
@@ -108,6 +108,11 @@ function resetGame() {
     key.disabled = false;
     key.style.cursor = 'pointer';
   });
+
+  ({ word: testWord, category, difficulty } = getRandomWordAny());
+  categoryName.textContent = category;
+  difficultyName.textContent = difficulty;
+  addWordToWordHolder(testWord);
 }
 
 newGameBtn.addEventListener('click', resetGame);
