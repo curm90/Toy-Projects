@@ -32,26 +32,26 @@
 
 ### Core Mechanics
 
-- [ ] Create word bank/dictionary
-- [ ] Implement word selection function
-- [ ] Create letter guess validation
-- [ ] Track game state
-- [ ] Handle win/loss conditions
+- [x] Create word bank/dictionary
+- [x] Implement word selection function
+- [x] Create letter guess validation
+- [x] Track game state
+- [x] Handle win/loss conditions
 
 ### User Interface
 
-- [ ] Implement keyboard input handling
-- [ ] Create virtual keyboard functionality
-- [ ] Update display on guess
+- [x] Implement keyboard input handling
+- [x] Create virtual keyboard functionality
+- [x] Update display on guess
 - [ ] Show/hide hangman parts
-- [ ] Update word display
-- [ ] Track and display used letters
+- [x] Update word display
+- [x] Track and display used letters
 
 ### Game Features
 
 - [ ] Add score tracking
-- [ ] Implement game reset
-- [ ] Add difficulty levels (optional)
+- [x] Implement game reset
+- [x] Add difficulty levels (optional)
 - [ ] Create win/loss animations
 - [ ] Add sound effects (optional)
 
