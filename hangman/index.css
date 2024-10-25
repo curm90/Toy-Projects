@@ -165,8 +165,9 @@ main {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 2rem;
+  text-align: center;
 
   .title {
     font-size: 4rem;
@@ -205,6 +206,15 @@ main {
   padding: 2rem;
 }
 
+.game-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  @media (min-width: 450px) {
+    flex-direction: row;
+  }
+}
+
 .game-control-btn {
   padding-block: 1rem;
   padding-inline: 2rem;
@@ -224,7 +234,16 @@ main {
 
 .category {
   font-size: 2rem;
-  margin-block: 2em;
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+}
+
+.category-name {
+  text-transform: capitalize;
+}
+
+.difficulty-name {
+  text-transform: capitalize;
 }
 
 .word-holder {
