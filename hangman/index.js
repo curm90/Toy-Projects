@@ -1,7 +1,21 @@
 import { getRandomWordAny } from './data.js';
 
-let numberOfGuesses = 9;
-// const testWord = 'test';
+const INITIAL_LIVES = 10;
+
+const hangmanParts = [
+  'base',
+  'pole',
+  'beam',
+  'noose',
+  'head',
+  'body',
+  'leftArm',
+  'rightArm',
+  'leftLeg',
+  'rightLeg',
+];
+
+let numberOfGuesses = INITIAL_LIVES;
 let { word: testWord, category, difficulty } = getRandomWordAny();
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
@@ -78,9 +92,9 @@ function handleGuess(guess, word) {
       handleWin();
     }
   } else {
-    // TODO: Disable guessed key and draw a part of the hangman
     numberOfGuesses--;
     livesRemaining.textContent = numberOfGuesses;
+    updateHangman(numberOfGuesses);
 
     if (numberOfGuesses < 1) {
       gameText.textContent = 'Game over!';
@@ -88,6 +102,20 @@ function handleGuess(guess, word) {
       return;
     }
   }
+}
+
+function updateHangman(livesRemaining) {
+  const partsToShow = INITIAL_LIVES - livesRemaining;
+
+  hangmanParts.slice(0, partsToShow).forEach((part) => {
+    document.getElementById(part).style.display = 'initial';
+  });
+}
+
+function resetHangman() {
+  hangmanParts.forEach((part) => {
+    document.getElementById(part).style.removeProperty('display');
+  });
 }
 
 for (const key of allKeys) {
@@ -99,9 +127,8 @@ for (const key of allKeys) {
 }
 
 function resetGame() {
-  numberOfGuesses = 9;
+  numberOfGuesses = INITIAL_LIVES;
   livesRemaining.textContent = numberOfGuesses;
-  addWordToWordHolder(testWord);
 
   gameText.textContent = '';
   [...allKeys].map((key) => {
@@ -113,6 +140,8 @@ function resetGame() {
   categoryName.textContent = category;
   difficultyName.textContent = difficulty;
   addWordToWordHolder(testWord);
+
+  resetHangman();
 }
 
 newGameBtn.addEventListener('click', resetGame);
