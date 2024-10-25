@@ -16,7 +16,7 @@ const hangmanParts = [
 ];
 
 let numberOfGuesses = INITIAL_LIVES;
-let { word: testWord, category, difficulty } = getRandomWordAny();
+let { word: wordObj, category, difficulty } = getRandomWordAny();
 const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
 const keyboardList = document.querySelector('.list');
@@ -26,6 +26,7 @@ const categoryName = document.querySelector('.category-name');
 const difficultyName = document.querySelector('.difficulty-name');
 const gameText = document.querySelector('.game-text');
 const newGameBtn = document.querySelector('.new-game');
+const hintBtn = document.querySelector('.hint-btn');
 
 categoryName.textContent = category;
 difficultyName.textContent = difficulty;
@@ -42,7 +43,7 @@ for (const letter of alphabet) {
 const allKeys = document.querySelectorAll('.key');
 
 livesRemaining.textContent = numberOfGuesses;
-addWordToWordHolder(testWord);
+addWordToWordHolder(wordObj.word);
 
 function addWordToWordHolder(word) {
   wordHolder.textContent = word
@@ -57,8 +58,7 @@ function checkIfGuessIsCorrect(guess, word) {
 
 function checkIfWordIsGuessedCorrectly(word) {
   const fullWord = word.split(' ').join('');
-  console.log(fullWord, testWord);
-  return fullWord === testWord;
+  return fullWord === wordObj.word;
 }
 
 function disableAllKeys() {
@@ -120,28 +120,51 @@ function resetHangman() {
 
 for (const key of allKeys) {
   key.addEventListener('click', () => {
-    handleGuess(key.textContent, testWord);
+    handleGuess(key.textContent, wordObj.word);
     key.disabled = true;
     key.style.cursor = 'not-allowed';
   });
 }
 
-function resetGame() {
-  numberOfGuesses = INITIAL_LIVES;
-  livesRemaining.textContent = numberOfGuesses;
+function showHint() {
+  gameText.textContent = wordObj.hint;
+  hintBtn.disabled = true;
+  hintBtn.style.cursor = 'not-allowed';
+}
 
-  gameText.textContent = '';
+function resetHintBtn() {
+  hintBtn.disabled = false;
+  hintBtn.style.cursor = 'pointer';
+}
+
+function resetWordState() {
+  ({ word: wordObj, category, difficulty } = getRandomWordAny());
+  categoryName.textContent = category;
+  difficultyName.textContent = difficulty;
+  addWordToWordHolder(wordObj.word);
+}
+
+function resetKeysState() {
   [...allKeys].map((key) => {
     key.disabled = false;
     key.style.cursor = 'pointer';
   });
+}
 
-  ({ word: testWord, category, difficulty } = getRandomWordAny());
-  categoryName.textContent = category;
-  difficultyName.textContent = difficulty;
-  addWordToWordHolder(testWord);
+function resetLives() {
+  numberOfGuesses = INITIAL_LIVES;
+  livesRemaining.textContent = numberOfGuesses;
+}
 
+function resetGame() {
+  gameText.textContent = '';
+
+  resetWordState();
+  resetKeysState();
+  resetLives();
+  resetHintBtn();
   resetHangman();
 }
 
+hintBtn.addEventListener('click', showHint);
 newGameBtn.addEventListener('click', resetGame);
