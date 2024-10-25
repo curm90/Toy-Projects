@@ -22,7 +22,40 @@
         <p class="word-holder"></p>
         <p class="lives">Lives remaining: <span class="lives-remaining">9</span></p>
         <p class="game-text"></p>
-        <div class="drawing">Hangman drawing</div>
+        <div class="drawing">
+          <svg id="hangman" viewBox="0 0 300 300">
+            <g id="base">
+              <line x1="50" y1="250" x2="250" y2="250" stroke="white" stroke-width="1" />
+            </g>
+            <g id="pole">
+              <line x1="100" y1="250" x2="100" y2="50" stroke="white" stroke-width="1" />
+            </g>
+            <g id="beam">
+              <line x1="100" y1="50" x2="200" y2="50" stroke="white" stroke-width="1" />
+            </g>
+            <g id="noose">
+              <line x1="200" y1="50" x2="200" y2="80" stroke="white" stroke-width="1" />
+            </g>
+            <g id="head">
+              <circle cx="200" cy="100" r="20" stroke="white" stroke-width="1" fill="none" />
+            </g>
+            <g id="body">
+              <line x1="200" y1="120" x2="200" y2="180" stroke="white" stroke-width="1" />
+            </g>
+            <g id="leftArm">
+              <line x1="200" y1="140" x2="160" y2="160" stroke="white" stroke-width="1" />
+            </g>
+            <g id="rightArm">
+              <line x1="200" y1="140" x2="240" y2="160" stroke="white" stroke-width="1" />
+            </g>
+            <g id="leftLeg">
+              <line x1="200" y1="180" x2="160" y2="220" stroke="white" stroke-width="1" />
+            </g>
+            <g id="rightLeg">
+              <line x1="200" y1="180" x2="240" y2="220" stroke="white" stroke-width="1" />
+            </g>
+          </svg>
+        </div>
         <div class="game-controls">
           <button class="game-control-btn new-game">New game</button>
           <button class="game-control-btn">Hint</button>
