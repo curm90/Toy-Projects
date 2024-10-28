@@ -75,16 +75,7 @@ function handleWin() {
 
 function handleGuess(guess, word) {
   if (checkIfGuessIsCorrect(guess, word)) {
-    const updatedWord = word
-      .split('')
-      .map((letter, index) => {
-        if (letter === guess) {
-          return letter;
-        } else {
-          return wordHolder.textContent.split(' ')[index];
-        }
-      })
-      .join(' ');
+    const updatedWord = updateWordHolder(word, guess);
 
     wordHolder.textContent = updatedWord;
 
@@ -102,6 +93,19 @@ function handleGuess(guess, word) {
       return;
     }
   }
+}
+
+function updateWordHolder(word, guess) {
+  return word
+    .split('')
+    .map((letter, index) => {
+      if (letter === guess) {
+        return letter;
+      } else {
+        return wordHolder.textContent.split(' ')[index];
+      }
+    })
+    .join(' ');
 }
 
 function updateHangman(livesRemaining) {
