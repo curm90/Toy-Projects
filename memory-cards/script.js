@@ -16,7 +16,7 @@ const symbols = [
   '🍩',
   '🍪',
 ];
-const matchesToWin = symbols.length / 2;
+let matchesToWin = symbols.length / 2;
 let numberOfTurns = 0;
 let flippedCards = [];
 
@@ -24,8 +24,10 @@ const cardContainers = document.querySelectorAll('.card-container');
 const frontFaces = document.querySelectorAll('.back');
 const resetButton = document.querySelector('.reset-button');
 const turnsCounter = document.querySelector('.turns-counter');
+const matchesToWinCounter = document.querySelector('.matches-to-win');
 
 turnsCounter.textContent = numberOfTurns;
+matchesToWinCounter.textContent = matchesToWin;
 
 function checkIfMatch(el1, el2) {
   return el1 === el2;
@@ -50,6 +52,8 @@ function resetGame() {
   flippedCards = [];
   numberOfTurns = 0;
   turnsCounter.textContent = numberOfTurns;
+  matchesToWin = symbols.length / 2;
+  matchesToWinCounter.textContent = matchesToWin;
 }
 
 cardContainers.forEach((cardContainer) => {
@@ -77,6 +81,8 @@ cardContainers.forEach((cardContainer) => {
         firstCard.removeEventListener('click', () => {});
         secondCard.removeEventListener('click', () => {});
         flippedCards = [];
+        matchesToWin--;
+        matchesToWinCounter.textContent = matchesToWin;
       } else {
         flipUnmatchCardsBack(firstCard, secondCard);
         flippedCards = [];

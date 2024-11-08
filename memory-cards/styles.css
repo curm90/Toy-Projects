@@ -225,6 +225,12 @@ main {
   transform: rotateY(180deg);
 }
 
+.game-scores {
+  display: flex;
+  gap: 4rem;
+  font-size: 2rem;
+}
+
 .reset-button {
   margin: 0 auto;
   padding: 1rem 2rem;
