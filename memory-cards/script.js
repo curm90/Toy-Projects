@@ -17,11 +17,15 @@ const symbols = [
   '🍪',
 ];
 const matchesToWin = symbols.length / 2;
+let numberOfTurns = 0;
 let flippedCards = [];
 
 const cardContainers = document.querySelectorAll('.card-container');
 const frontFaces = document.querySelectorAll('.back');
-// const turnsCounter = document.querySelector('.turns-counter');
+const resetButton = document.querySelector('.reset-button');
+const turnsCounter = document.querySelector('.turns-counter');
+
+turnsCounter.textContent = numberOfTurns;
 
 function checkIfMatch(el1, el2) {
   return el1 === el2;
@@ -36,6 +40,16 @@ function flipUnmatchCardsBack(card1, card2) {
     card1.classList.remove('flipped');
     card2.classList.remove('flipped');
   }, 1000);
+}
+
+function resetGame() {
+  cardContainers.forEach((card) => {
+    card.classList.remove('flipped');
+  });
+
+  flippedCards = [];
+  numberOfTurns = 0;
+  turnsCounter.textContent = numberOfTurns;
 }
 
 cardContainers.forEach((cardContainer) => {
@@ -67,6 +81,8 @@ cardContainers.forEach((cardContainer) => {
         flipUnmatchCardsBack(firstCard, secondCard);
         flippedCards = [];
       }
+
+      turnsCounter.textContent = ++numberOfTurns;
     }
   });
 });
@@ -90,5 +106,7 @@ randomSymbols.forEach((symbol, i) => {
   console.log({ symbol });
   frontFaces[i].textContent = symbol;
 });
+
+resetButton.addEventListener('click', resetGame);
 
 console.log({ frontFaces });
