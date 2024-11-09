@@ -166,6 +166,12 @@ main {
   font-size: 2rem;
 }
 
+.winning-message {
+  font-size: 3rem;
+  text-align: center;
+  /* margin-top: 2rem; */
+}
+
 .game-container {
   display: flex;
   flex-direction: column;
@@ -186,6 +192,9 @@ main {
   height: 90px;
   perspective: 1000px;
   cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
 }
 
 .card {
@@ -211,7 +220,6 @@ main {
 
 .front {
   background-color: #f7f7f7;
-  z-index: 2;
 }
 
 .back {
@@ -219,6 +227,11 @@ main {
   border: 1px solid pink;
   transform: rotateY(180deg);
   font-size: 3.5rem;
+}
+
+.card-container:disabled {
+  cursor: not-allowed;
+  /* opacity: 0.6; */
 }
 
 .card-container.flipped .card {

@@ -20,11 +20,12 @@ let matchesToWin = symbols.length / 2;
 let numberOfTurns = 0;
 let flippedCards = [];
 
-const cardContainers = document.querySelectorAll('.card-container');
+const allCards = document.querySelectorAll('.card-container');
 const frontFaces = document.querySelectorAll('.back');
 const resetButton = document.querySelector('.reset-button');
 const turnsCounter = document.querySelector('.turns-counter');
 const matchesToWinCounter = document.querySelector('.matches-to-win');
+const winningMessage = document.querySelector('.winning-message');
 
 turnsCounter.textContent = numberOfTurns;
 matchesToWinCounter.textContent = matchesToWin;
@@ -45,7 +46,7 @@ function flipUnmatchCardsBack(card1, card2) {
 }
 
 function resetGame() {
-  cardContainers.forEach((card) => {
+  allCards.forEach((card) => {
     card.classList.remove('flipped');
   });
 
@@ -54,44 +55,64 @@ function resetGame() {
   turnsCounter.textContent = numberOfTurns;
   matchesToWin = symbols.length / 2;
   matchesToWinCounter.textContent = matchesToWin;
+  winningMessage.textContent = '';
 }
 
-cardContainers.forEach((cardContainer) => {
-  cardContainer.addEventListener('click', () => {
-    cardContainer.classList.toggle('flipped');
+function handleCardClick(e) {
+  const card = e.currentTarget;
+  card.classList.toggle('flipped');
 
-    flippedCards.push(cardContainer);
+  flippedCards.push(card);
 
-    console.log({ flippedCards });
+  console.log({ flippedCards });
 
-    if (flippedCards.length === 2) {
-      const [firstCard, secondCard] = flippedCards;
+  if (flippedCards.length === 2) {
+    const [firstCard, secondCard] = flippedCards;
 
-      const firstCardTextContent = firstCard.querySelector('.back').textContent;
-      const secondCardTextContent = secondCard.querySelector('.back').textContent;
+    const firstCardTextContent = firstCard.querySelector('.back').textContent;
+    const secondCardTextContent = secondCard.querySelector('.back').textContent;
 
-      console.log({ firstCardTextContent, secondCardTextContent });
-      const symbolOneCode = getSymbolUniCode(firstCardTextContent);
-      const symbolTwoCode = getSymbolUniCode(secondCardTextContent);
+    console.log({ firstCardTextContent, secondCardTextContent });
+    const symbolOneCode = getSymbolUniCode(firstCardTextContent);
+    const symbolTwoCode = getSymbolUniCode(secondCardTextContent);
 
-      console.log({ symbolOneCode, symbolTwoCode });
+    console.log({ symbolOneCode, symbolTwoCode });
 
-      if (checkIfMatch(firstCardTextContent, secondCardTextContent)) {
-        console.log('Match!');
-        firstCard.removeEventListener('click', () => {});
-        secondCard.removeEventListener('click', () => {});
-        flippedCards = [];
-        matchesToWin--;
-        matchesToWinCounter.textContent = matchesToWin;
-      } else {
-        flipUnmatchCardsBack(firstCard, secondCard);
-        flippedCards = [];
+    if (checkIfMatch(firstCardTextContent, secondCardTextContent)) {
+      console.log('Match!');
+      firstCard.removeEventListener('click', () => {});
+      secondCard.removeEventListener('click', () => {});
+      flippedCards = [];
+      matchesToWin--;
+      matchesToWinCounter.textContent = matchesToWin;
+
+      if (matchesToWin === 0) {
+        handleWin();
       }
-
-      turnsCounter.textContent = ++numberOfTurns;
+    } else {
+      flipUnmatchCardsBack(firstCard, secondCard);
+      flippedCards = [];
     }
-  });
+
+    turnsCounter.textContent = ++numberOfTurns;
+  }
+}
+
+allCards.forEach((card) => {
+  card.addEventListener('click', handleCardClick);
 });
+
+function disableAllCardsClick() {
+  allCards.forEach((card) => {
+    card.removeEventListener('click', handleCardClick);
+    card.disabled = true;
+  });
+}
+
+function handleWin() {
+  winningMessage.textContent = `Congratulations! 🎉 You won in ${numberOfTurns} turns.`;
+  disableAllCardsClick();
+}
 
 function shuffle(array) {
   let currentIndex = 0;
