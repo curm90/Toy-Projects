@@ -173,10 +173,11 @@ main {
 .word-search {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 2;
-  max-width: 360px;
+  grid-column-gap: 5px;
+  max-width: 450px;
   border: 1px solid #fdfcfb;
   border-radius: 5px;
+  padding: 1rem;
 }
 
 .row {
@@ -189,5 +190,21 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 2.4rem;
+}
+
+.submit-btn {
+  background-color: transparent;
+  border: 1px solid #fdfcfb;
+  border-radius: 5px;
+  padding: 1rem 1.6rem;
+  font-size: 1.8rem;
+  color: #fdfcfb;
+  cursor: pointer;
+  margin-top: 2rem;
+  &:hover {
+    background-color: #fdfcfb;
+    transition: all 0.3s;
+    color: #764ba2;
+  }
 }
