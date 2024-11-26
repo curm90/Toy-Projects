@@ -34,20 +34,15 @@ function checkIfMatch(el1, el2) {
   return el1 === el2;
 }
 
-function getSymbolUniCode(symbol) {
-  return symbol.codePointAt(0);
-}
-
 function flipUnmatchCardsBack(card1, card2) {
-  setTimeout(() => {
-    card1.classList.remove('flipped');
-    card2.classList.remove('flipped');
-  }, 1000);
+  card1.classList.remove('flipped');
+  card2.classList.remove('flipped');
 }
 
 function resetGame() {
   allCards.forEach((card) => {
     card.classList.remove('flipped');
+    card.addEventListener('click', handleCardClick);
   });
 
   flippedCards = [];
@@ -64,34 +59,34 @@ function handleCardClick(e) {
 
   flippedCards.push(card);
 
-  console.log({ flippedCards });
-
   if (flippedCards.length === 2) {
+    disableAllCardsClick();
     const [firstCard, secondCard] = flippedCards;
 
     const firstCardTextContent = firstCard.querySelector('.back').textContent;
     const secondCardTextContent = secondCard.querySelector('.back').textContent;
 
     console.log({ firstCardTextContent, secondCardTextContent });
-    const symbolOneCode = getSymbolUniCode(firstCardTextContent);
-    const symbolTwoCode = getSymbolUniCode(secondCardTextContent);
-
-    console.log({ symbolOneCode, symbolTwoCode });
 
     if (checkIfMatch(firstCardTextContent, secondCardTextContent)) {
       console.log('Match!');
-      firstCard.removeEventListener('click', () => {});
-      secondCard.removeEventListener('click', () => {});
+      firstCard.removeEventListener('click', handleCardClick);
+      secondCard.removeEventListener('click', handleCardClick);
       flippedCards = [];
       matchesToWin--;
       matchesToWinCounter.textContent = matchesToWin;
 
       if (matchesToWin === 0) {
         handleWin();
+      } else {
+        enableAllCardsClick();
       }
     } else {
-      flipUnmatchCardsBack(firstCard, secondCard);
-      flippedCards = [];
+      setTimeout(() => {
+        flipUnmatchCardsBack(firstCard, secondCard);
+        flippedCards = [];
+        enableAllCardsClick();
+      }, 1000);
     }
 
     turnsCounter.textContent = ++numberOfTurns;
@@ -105,7 +100,12 @@ allCards.forEach((card) => {
 function disableAllCardsClick() {
   allCards.forEach((card) => {
     card.removeEventListener('click', handleCardClick);
-    card.disabled = true;
+  });
+}
+
+function enableAllCardsClick() {
+  allCards.forEach((card) => {
+    card.addEventListener('click', handleCardClick);
   });
 }
 
