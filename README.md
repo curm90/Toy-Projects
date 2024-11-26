@@ -5,14 +5,17 @@ This repository serves as a collection of small programming projects and games i
 ## Projects
 
 Currently, this repository includes:
+
 - **Hangman**: A classic word-guessing game implementation
 - **Tic-tac-toe**: The timeless game of X's and O's
+- **Memory Card Game**: A game where players match pairs of cards based on memory
 
 More projects will be added over time!
 
 ## Purpose
 
 The main goals of this repository are:
+
 - Provide simple, well-documented code examples
 - Demonstrate basic programming concepts
 - Serve as a playground for learning and experimentation
@@ -21,6 +24,7 @@ The main goals of this repository are:
 ## Structure
 
 Each project is contained in its own directory with:
+
 - Source code
 - Project-specific README
 - Any additional resources needed for the project
@@ -28,6 +32,7 @@ Each project is contained in its own directory with:
 ## Getting Started
 
 To explore any project:
+
 1. Navigate to the project's directory
 2. Read the project-specific README.md file
 3. Follow the setup and running instructions provided in each project
@@ -35,6 +40,7 @@ To explore any project:
 ## Contributing
 
 Feel free to:
+
 - Create new projects
 - Improve existing implementations
 - Fix bugs
