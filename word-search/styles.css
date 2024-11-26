@@ -1,0 +1,20 @@
+.word-search {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2;
+  max-width: 360px;
+  border: 1px solid black;
+}
+
+.row {
+  display: content;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
