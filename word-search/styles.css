@@ -191,6 +191,18 @@ main {
   justify-content: center;
   align-items: center;
   font-size: 2.4rem;
+  text-transform: uppercase;
+}
+
+.selected-word-wrapper {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-top: 2rem;
+
+  h4 {
+    font-size: 2.4rem;
+  }
 }
 
 .submit-btn {
@@ -207,4 +219,25 @@ main {
     transition: all 0.3s;
     color: #764ba2;
   }
+}
+
+.words-to-find {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block: 2rem;
+
+  span {
+    font-size: 2.4rem;
+    margin-bottom: 3rem;
+  }
+}
+
+.words-list {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  font-size: 1.6rem;
+  grid-gap: 3rem;
+  text-align: center;
+  text-transform: uppercase;
 }
