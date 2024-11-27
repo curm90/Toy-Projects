@@ -192,6 +192,7 @@ main {
   align-items: center;
   font-size: 2.4rem;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
 .selected-word-wrapper {
@@ -201,7 +202,13 @@ main {
   margin-top: 2rem;
 
   h4 {
-    font-size: 2.4rem;
+    font-size: 2rem;
+  }
+
+  .selected-word {
+    font-size: 2rem;
+    color: yellow;
+    text-transform: uppercase;
   }
 }
 
@@ -240,4 +247,17 @@ main {
   grid-gap: 3rem;
   text-align: center;
   text-transform: uppercase;
+}
+
+.cell.selected {
+  color: yellow;
+}
+
+.cell.highlighted {
+  background-color: #764ba2;
+}
+
+.found {
+  opacity: 0.8;
+  text-decoration: line-through;
 }
