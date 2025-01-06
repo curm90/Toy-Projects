@@ -213,7 +213,12 @@ main {
   }
 }
 
-.submit-btn {
+.buttons {
+  display: flex;
+  gap: 3rem;
+}
+
+.btn {
   background-color: transparent;
   border: 1px solid #fdfcfb;
   border-radius: 5px;
