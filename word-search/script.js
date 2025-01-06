@@ -8,6 +8,7 @@ const wordSearch = document.querySelector('.word-search');
 const selectedWord = document.querySelector('.selected-word');
 const wordsToFindList = document.querySelector('.words-list');
 const submitWordBtn = document.querySelector('.submit-btn');
+const resetWordBtn = document.querySelector('.reset-btn');
 
 function renderWordSearchGrid(grid) {
   wordSearch.innerHTML = '';
@@ -39,8 +40,18 @@ function renderWordsToFind(words) {
 
 function resetSelection() {
   currentSelection = [];
-  selectedCells = [];
   selectedWord.textContent = '';
+}
+
+function resetGame() {
+  selectedCells.forEach((cell) => {
+    cell.classList.remove('selected', 'highlighted');
+  });
+
+  resetSelection();
+  wordsToFindList.querySelectorAll('li').forEach((word) => {
+    word.classList.remove('found');
+  });
 }
 
 function highlightWord() {
@@ -67,8 +78,6 @@ function onWordSubmit() {
   const word = selectedWord.textContent;
   const foundWordIndex = WORDSTOFIND.findIndex((w) => word.toLowerCase() === w.toLowerCase());
 
-  console.log({ foundWordIndex });
-
   if (foundWordIndex > -1) {
     const foundWord = WORDSTOFIND[foundWordIndex];
     console.log({ foundWord, wordsToFindList });
@@ -83,6 +92,7 @@ function onWordSubmit() {
 }
 
 submitWordBtn.addEventListener('click', onWordSubmit);
+resetWordBtn.addEventListener('click', resetGame);
 
 document.addEventListener('DOMContentLoaded', () => {
   const grid = generateWordSearchGrid(12);
