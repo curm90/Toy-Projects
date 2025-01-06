@@ -171,17 +171,18 @@ main {
 }
 
 .word-search {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-column-gap: 5px;
+  display: flex;
+  flex-direction: column;
   max-width: 450px;
+  gap: 5px;
   border: 1px solid #fdfcfb;
   border-radius: 5px;
   padding: 1rem;
 }
 
 .row {
-  display: content;
+  display: flex;
+  gap: 5px;
 }
 
 .cell {
