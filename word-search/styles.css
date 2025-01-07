@@ -264,6 +264,6 @@ main {
 }
 
 .found {
-  opacity: 0.8;
+  opacity: 0.3;
   text-decoration: line-through;
 }
