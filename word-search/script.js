@@ -1,5 +1,6 @@
 import { WORDSTOFIND } from './constants.js';
-import { generateWordSearchGrid } from './helpers.js';
+import { generateWordSearchGrid } from './renderGrid.js';
+import { renderWordsToFind } from './wordsToFind.js';
 
 let currentSelection = [];
 let selectedCells = [];
@@ -30,27 +31,35 @@ function renderWordSearchGrid(grid) {
   });
 }
 
-function renderWordsToFind(words) {
-  words.forEach((word) => {
-    const wordItem = document.createElement('li');
-    wordItem.textContent = word;
-    wordsToFindList.appendChild(wordItem);
-  });
-}
-
 function resetSelection() {
   currentSelection = [];
   selectedWord.textContent = '';
 }
 
 function resetGame() {
+  removeSelectedAndHighlightedClasses();
+  removeFoundClass(wordsToFindList);
+  selectedCells = [];
+}
+
+function removeFoundClass(wordList) {
+  wordList.querySelectorAll('li').forEach((word) => {
+    word.classList.remove('found');
+  });
+}
+
+function removeSelectedClass(word) {
+  const lastSelectedWordCells = selectedCells.slice(-word.length);
+
+  lastSelectedWordCells.forEach((cell) => {
+    cell.classList.remove('selected');
+  });
+  selectedCells = selectedCells.slice(0, -word.length);
+}
+
+function removeSelectedAndHighlightedClasses() {
   selectedCells.forEach((cell) => {
     cell.classList.remove('selected', 'highlighted');
-  });
-
-  resetSelection();
-  wordsToFindList.querySelectorAll('li').forEach((word) => {
-    word.classList.remove('found');
   });
 }
 
@@ -63,12 +72,10 @@ function highlightWord() {
 function handleCellClick(e) {
   const cell = e.target;
   const letter = cell.textContent;
-  const row = cell.dataset.row;
-  const col = cell.dataset.col;
+  const { row, col } = cell.dataset;
 
   currentSelection.push({ letter, row, col });
   selectedCells.push(cell);
-
   selectedWord.textContent = currentSelection.map((cell) => cell.letter).join('');
 
   cell.classList.add('selected');
@@ -79,15 +86,15 @@ function onWordSubmit() {
   const foundWordIndex = WORDSTOFIND.findIndex((w) => word.toLowerCase() === w.toLowerCase());
 
   if (foundWordIndex > -1) {
-    const foundWord = WORDSTOFIND[foundWordIndex];
-    console.log({ foundWord, wordsToFindList });
-
     wordsToFindList.children[foundWordIndex].classList.add('found');
     highlightWord();
     resetSelection();
   } else {
     alert('Word not found');
-    resetSelection();
+
+    removeSelectedClass(word);
+    selectedWord.textContent = '';
+    currentSelection = [];
   }
 }
 
