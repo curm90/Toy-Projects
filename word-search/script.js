@@ -1,5 +1,6 @@
 import { WORDSTOFIND } from './constants.js';
 import { generateWordSearchGrid } from './renderGrid.js';
+import { checkWinCondition } from './winModal.js';
 import { renderWordsToFind } from './wordsToFind.js';
 
 let currentSelection = [];
@@ -36,7 +37,7 @@ function resetSelection() {
   selectedWord.textContent = '';
 }
 
-function resetGame() {
+export function resetGame() {
   removeSelectedAndHighlightedClasses();
   removeFoundClass(wordsToFindList);
   selectedCells = [];
@@ -82,6 +83,11 @@ function handleCellClick(e) {
 }
 
 function onWordSubmit() {
+  if (currentSelection.length === 0) {
+    selectedWord.textContent = 'Select a word first';
+    return;
+  }
+
   const word = selectedWord.textContent;
   const foundWordIndex = WORDSTOFIND.findIndex((w) => word.toLowerCase() === w.toLowerCase());
 
@@ -89,6 +95,7 @@ function onWordSubmit() {
     wordsToFindList.children[foundWordIndex].classList.add('found');
     highlightWord();
     resetSelection();
+    checkWinCondition(WORDSTOFIND);
   } else {
     selectedWord.textContent = 'Invalid word';
     removeSelectedClass(word);
