@@ -141,7 +141,7 @@ body {
   /* background-image: linear-gradient(to right, #434343 0%, black 100%); */
   background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #f7f7f7;
-  min-height: 100vh;
+  min-height: calc(100vh - 4rem);
 }
 
 main {
@@ -266,4 +266,49 @@ main {
 .found {
   opacity: 0.3;
   text-decoration: line-through;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: relative;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  width: 65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    font-size: 3rem;
+  }
+}
+
+.close-btn {
+  color: #aaa;
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
