@@ -90,10 +90,8 @@ function onWordSubmit() {
     highlightWord();
     resetSelection();
   } else {
-    alert('Word not found');
-
+    selectedWord.textContent = 'Invalid word';
     removeSelectedClass(word);
-    selectedWord.textContent = '';
     currentSelection = [];
   }
 }
