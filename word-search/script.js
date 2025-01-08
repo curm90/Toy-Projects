@@ -76,9 +76,9 @@ function handleCellClick(e) {
   const letter = cell.textContent;
   const { row, col } = cell.dataset;
 
-  if (cell.classList.contains('selected')) {
-    return;
-  }
+  // if (cell.classList.contains('selected')) {
+  //   return;
+  // }
 
   currentSelection.push({ letter, row, col });
   selectedCells.push(cell);

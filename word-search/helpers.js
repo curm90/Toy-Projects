@@ -4,10 +4,20 @@ export function generateRandomLetter() {
   return ALPHABET[Math.floor(Math.random() * ALPHABET.length)];
 }
 
-export function findRandomStartPointForWord(word, gridSize) {
+export function findRandomStartPointForWord(word, gridSize, direction) {
   const maxStartPoint = gridSize - word.length;
-  const row = Math.floor(Math.random() * gridSize);
-  const col = Math.floor(Math.random() * (maxStartPoint + 1));
+  let row, col;
+
+  if (direction === 'horizontal') {
+    row = Math.floor(Math.random() * gridSize);
+    col = Math.floor(Math.random() * (maxStartPoint + 1));
+  } else if (direction === 'vertical') {
+    row = Math.floor(Math.random() * (maxStartPoint + 1));
+    col = Math.floor(Math.random() * gridSize);
+  } else if (direction === 'diagonal') {
+    row = Math.floor(Math.random() * (maxStartPoint + 1));
+    col = Math.floor(Math.random() * (maxStartPoint + 1));
+  }
 
   return { row, col };
 }
