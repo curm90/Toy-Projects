@@ -41,6 +41,7 @@ export function resetGame() {
   removeSelectedAndHighlightedClasses();
   removeFoundClass(wordsToFindList);
   selectedCells = [];
+  resetSelection();
 }
 
 function removeFoundClass(wordList) {
@@ -74,6 +75,7 @@ function handleCellClick(e) {
   const cell = e.target;
   const letter = cell.textContent;
   const { row, col } = cell.dataset;
+  console.log({ cell });
 
   currentSelection.push({ letter, row, col });
   selectedCells.push(cell);
