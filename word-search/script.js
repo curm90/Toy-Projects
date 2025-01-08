@@ -75,7 +75,10 @@ function handleCellClick(e) {
   const cell = e.target;
   const letter = cell.textContent;
   const { row, col } = cell.dataset;
-  console.log({ cell });
+
+  if (cell.classList.contains('selected')) {
+    return;
+  }
 
   currentSelection.push({ letter, row, col });
   selectedCells.push(cell);
