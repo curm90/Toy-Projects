@@ -312,3 +312,11 @@ main {
   text-decoration: none;
   cursor: pointer;
 }
+
+.word-search {
+  user-select: none; /* Disable text selection */
+}
+
+.cell {
+  user-select: none; /* Disable text selection */
+}
