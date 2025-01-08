@@ -38,18 +38,22 @@ function flipUnmatchCardsBack(card1, card2) {
   card1.classList.remove('flipped');
   card2.classList.remove('flipped');
 }
-
 function resetGame() {
+  flippedCards = [];
+  numberOfTurns = 0;
+  turnsCounter.textContent = numberOfTurns;
+
+  shuffleArray(symbols);
+
+  symbols.forEach((symbol, i) => {
+    frontFaces[i].textContent = symbol;
+  });
+
   allCards.forEach((card) => {
     card.classList.remove('flipped');
     card.addEventListener('click', handleCardClick);
   });
 
-  flippedCards = [];
-  numberOfTurns = 0;
-  turnsCounter.textContent = numberOfTurns;
-  matchesToWin = symbols.length / 2;
-  matchesToWinCounter.textContent = matchesToWin;
   winningMessage.textContent = '';
 }
 
@@ -114,26 +118,31 @@ function handleWin() {
   disableAllCardsClick();
 }
 
-function shuffle(array) {
-  let currentIndex = 0;
+// function shuffle(array) {
+//   let currentIndex = array.length,
+//     randomIndex;
 
-  while (currentIndex < array.length - 1) {
-    const randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex++;
+//   while (currentIndex !== 0) {
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex--;
 
-    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+//     [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+//   }
+
+//   return array;
+// }
+
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
-
-  return array;
 }
 
-const randomSymbols = shuffle(symbols);
+shuffleArray(symbols);
 
-randomSymbols.forEach((symbol, i) => {
-  console.log({ symbol });
+symbols.forEach((symbol, i) => {
   frontFaces[i].textContent = symbol;
 });
 
 resetButton.addEventListener('click', resetGame);
-
-console.log({ frontFaces });
