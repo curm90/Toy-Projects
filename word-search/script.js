@@ -5,6 +5,7 @@ import { renderWordsToFind } from './wordsToFind.js';
 
 let currentSelection = [];
 let selectedCells = [];
+let isSelecting = false;
 
 const wordSearch = document.querySelector('.word-search');
 const selectedWord = document.querySelector('.selected-word');
@@ -26,10 +27,34 @@ function renderWordSearchGrid(grid) {
       cellDiv.dataset.col = colIndex;
       rowDiv.appendChild(cellDiv);
       cellDiv.addEventListener('click', handleCellClick);
+      cellDiv.addEventListener('mousedown', handleOnMouseDown);
+      cellDiv.addEventListener('mousemove', handleOnMouseMove);
+      cellDiv.addEventListener('mouseup', handleOnMouseUp);
     });
 
     wordSearch.appendChild(rowDiv);
   });
+}
+
+function handleOnMouseDown(e) {
+  e.preventDefault();
+  isSelecting = true;
+  console.log('mouse down', isSelecting);
+  addCellToSelection(e.target);
+}
+
+function handleOnMouseMove(e) {
+  e.preventDefault();
+  if (isSelecting) {
+    console.log('mouse move', isSelecting);
+    addCellToSelection(e.target);
+  }
+}
+
+function handleOnMouseUp(e) {
+  e.preventDefault();
+  isSelecting = false;
+  console.log('mouse up', isSelecting);
 }
 
 function resetSelection() {
@@ -71,20 +96,19 @@ function highlightWord() {
   });
 }
 
-function handleCellClick(e) {
-  const cell = e.target;
-  const letter = cell.textContent;
+function addCellToSelection(cell) {
   const { row, col } = cell.dataset;
 
-  // if (cell.classList.contains('selected')) {
-  //   return;
-  // }
+  if (!currentSelection.some((c) => c.row === row && c.col === col)) {
+    currentSelection.push({ letter: cell.textContent, row, col });
+    selectedCells.push(cell);
+    selectedWord.textContent = currentSelection.map((cell) => cell.letter).join('');
+    cell.classList.add('selected');
+  }
+}
 
-  currentSelection.push({ letter, row, col });
-  selectedCells.push(cell);
-  selectedWord.textContent = currentSelection.map((cell) => cell.letter).join('');
-
-  cell.classList.add('selected');
+function handleCellClick(e) {
+  addCellToSelection(e.target);
 }
 
 function onWordSubmit() {
