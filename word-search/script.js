@@ -1,4 +1,4 @@
-import { generateWordSearchGrid } from './renderGrid.js';
+import { generateWordSearchGrid } from './generateGrid.js';
 import { checkWinCondition } from './winModal.js';
 import { getRandomWords } from './wordsData.js';
 import { renderWordsToFind } from './wordsToFind.js';
