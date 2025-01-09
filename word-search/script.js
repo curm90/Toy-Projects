@@ -1,11 +1,12 @@
-import { WORDSTOFIND } from './constants.js';
 import { generateWordSearchGrid } from './renderGrid.js';
 import { checkWinCondition } from './winModal.js';
+import { getRandomWords } from './wordsData.js';
 import { renderWordsToFind } from './wordsToFind.js';
 
 let currentSelection = [];
 let selectedCells = [];
 let isSelecting = false;
+let { words: wordsToFind, category } = getRandomWords();
 
 const wordSearch = document.querySelector('.word-search');
 const selectedWord = document.querySelector('.selected-word');
@@ -67,6 +68,13 @@ export function resetGame() {
   removeFoundClass(wordsToFindList);
   selectedCells = [];
   resetSelection();
+
+  ({ words: wordsToFind, category } = getRandomWords());
+  wordsToFindList.innerHTML = '';
+
+  const grid = generateWordSearchGrid(12, wordsToFind);
+  renderWordSearchGrid(grid);
+  renderWordsToFind(wordsToFind);
 }
 
 function removeFoundClass(wordList) {
@@ -118,13 +126,13 @@ function onWordSubmit() {
   }
 
   const word = selectedWord.textContent;
-  const foundWordIndex = WORDSTOFIND.findIndex((w) => word.toLowerCase() === w.toLowerCase());
+  const foundWordIndex = wordsToFind.findIndex((w) => word.toLowerCase() === w.toLowerCase());
 
   if (foundWordIndex > -1) {
     wordsToFindList.children[foundWordIndex].classList.add('found');
     highlightWord();
     resetSelection();
-    checkWinCondition(WORDSTOFIND);
+    checkWinCondition(wordsToFind);
   } else {
     selectedWord.textContent = 'Invalid word';
     removeSelectedClass(word);
@@ -136,7 +144,7 @@ submitWordBtn.addEventListener('click', onWordSubmit);
 resetWordBtn.addEventListener('click', resetGame);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const grid = generateWordSearchGrid(12);
+  const grid = generateWordSearchGrid(12, wordsToFind);
   renderWordSearchGrid(grid);
-  renderWordsToFind(WORDSTOFIND);
+  renderWordsToFind(wordsToFind);
 });
