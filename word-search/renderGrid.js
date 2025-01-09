@@ -82,6 +82,7 @@ export function generateWordSearchGrid(size, wordsToFind) {
     }
 
     if (!placed) {
+      // TODO: Handle this case better. Maybe return the word or filter that word out of the list
       console.error(`Could not place word: ${word}`);
     }
   });
