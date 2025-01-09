@@ -235,6 +235,13 @@ main {
   }
 }
 
+.category-wrapper {
+  display: flex;
+  margin-top: 2rem;
+  gap: 1rem;
+  font-size: 2rem;
+}
+
 .words-to-find {
   display: flex;
   flex-direction: column;
