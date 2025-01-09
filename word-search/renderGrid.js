@@ -1,4 +1,3 @@
-import { WORDSTOFIND } from './constants.js';
 import { findRandomStartPointForWord, generateRandomLetter, shuffleArray } from './helpers.js';
 
 function canPlaceWord(grid, word, startPoint, direction) {
@@ -59,12 +58,14 @@ function fillEmptyCells(grid) {
   }
 }
 
-export function generateWordSearchGrid(size) {
+export function generateWordSearchGrid(size, wordsToFind) {
   const grid = Array.from({ length: size }, () => Array.from({ length: size }).fill(null));
+  console.log({ wordsToFind });
+
   const directions = ['horizontal', 'vertical', 'diagonal'];
   const maxAttempts = 100;
 
-  const shuffledWords = [...WORDSTOFIND];
+  const shuffledWords = [...wordsToFind];
   shuffleArray(shuffledWords);
 
   shuffledWords.forEach((word) => {
@@ -81,6 +82,8 @@ export function generateWordSearchGrid(size) {
       }
       attempts += 1;
     }
+
+    console.log({ word, attempts });
 
     if (!placed) {
       console.error(`Could not place word: ${word}`);
