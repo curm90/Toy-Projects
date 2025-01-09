@@ -13,6 +13,7 @@ const selectedWord = document.querySelector('.selected-word');
 const wordsToFindList = document.querySelector('.words-list');
 const submitWordBtn = document.querySelector('.submit-btn');
 const resetWordBtn = document.querySelector('.reset-btn');
+const categoryEl = document.querySelector('.category');
 
 function renderWordSearchGrid(grid) {
   wordSearch.innerHTML = '';
@@ -75,6 +76,7 @@ export function resetGame() {
   const grid = generateWordSearchGrid(12, wordsToFind);
   renderWordSearchGrid(grid);
   renderWordsToFind(wordsToFind);
+  categoryEl.textContent = category;
 }
 
 function removeFoundClass(wordList) {
@@ -147,4 +149,5 @@ document.addEventListener('DOMContentLoaded', () => {
   const grid = generateWordSearchGrid(14, wordsToFind);
   renderWordSearchGrid(grid);
   renderWordsToFind(wordsToFind);
+  categoryEl.textContent = category;
 });
