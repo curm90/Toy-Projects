@@ -175,8 +175,7 @@ main {
 .word-search {
   display: flex;
   flex-direction: column;
-  max-width: 450px;
-  gap: 5px;
+  max-width: 650px;
   border: 1px solid #fdfcfb;
   border-radius: 5px;
   padding: 1rem;
@@ -184,7 +183,6 @@ main {
 
 .row {
   display: flex;
-  gap: 5px;
 }
 
 .cell {
@@ -196,6 +194,7 @@ main {
   font-size: 2.4rem;
   text-transform: uppercase;
   cursor: pointer;
+  padding: 0.5rem;
 }
 
 .selected-word-wrapper {

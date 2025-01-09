@@ -144,7 +144,7 @@ submitWordBtn.addEventListener('click', onWordSubmit);
 resetWordBtn.addEventListener('click', resetGame);
 
 document.addEventListener('DOMContentLoaded', () => {
-  const grid = generateWordSearchGrid(12, wordsToFind);
+  const grid = generateWordSearchGrid(14, wordsToFind);
   renderWordSearchGrid(grid);
   renderWordsToFind(wordsToFind);
 });
