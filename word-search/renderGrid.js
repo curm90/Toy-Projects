@@ -60,8 +60,6 @@ function fillEmptyCells(grid) {
 
 export function generateWordSearchGrid(size, wordsToFind) {
   const grid = Array.from({ length: size }, () => Array.from({ length: size }).fill(null));
-  console.log({ wordsToFind });
-
   const directions = ['horizontal', 'vertical', 'diagonal'];
   const maxAttempts = 100;
 
@@ -82,8 +80,6 @@ export function generateWordSearchGrid(size, wordsToFind) {
       }
       attempts += 1;
     }
-
-    console.log({ word, attempts });
 
     if (!placed) {
       console.error(`Could not place word: ${word}`);

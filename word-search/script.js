@@ -41,14 +41,12 @@ function renderWordSearchGrid(grid) {
 function handleOnMouseDown(e) {
   e.preventDefault();
   isSelecting = true;
-  console.log('mouse down', isSelecting);
   addCellToSelection(e.target);
 }
 
 function handleOnMouseMove(e) {
   e.preventDefault();
   if (isSelecting) {
-    console.log('mouse move', isSelecting);
     addCellToSelection(e.target);
   }
 }
@@ -56,7 +54,6 @@ function handleOnMouseMove(e) {
 function handleOnMouseUp(e) {
   e.preventDefault();
   isSelecting = false;
-  console.log('mouse up', isSelecting);
 }
 
 function resetSelection() {
