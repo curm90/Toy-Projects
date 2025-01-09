@@ -56,6 +56,10 @@ function handleOnMouseUp(e) {
   isSelecting = false;
 }
 
+function handleCellClick(e) {
+  addCellToSelection(e.target);
+}
+
 function resetSelection() {
   currentSelection = [];
   selectedWord.textContent = '';
@@ -70,25 +74,7 @@ export function resetGame() {
   ({ words: wordsToFind, category } = getRandomWords());
   wordsToFindList.innerHTML = '';
 
-  const grid = generateWordSearchGrid(12, wordsToFind);
-  renderWordSearchGrid(grid);
-  renderWordsToFind(wordsToFind);
-  categoryEl.textContent = category;
-}
-
-function removeFoundClass(wordList) {
-  wordList.querySelectorAll('li').forEach((word) => {
-    word.classList.remove('found');
-  });
-}
-
-function removeSelectedClass(word) {
-  const lastSelectedWordCells = selectedCells.slice(-word.length);
-
-  lastSelectedWordCells.forEach((cell) => {
-    cell.classList.remove('selected');
-  });
-  selectedCells = selectedCells.slice(0, -word.length);
+  renderUi();
 }
 
 function removeSelectedAndHighlightedClasses() {
@@ -103,6 +89,21 @@ function highlightWord() {
   });
 }
 
+function removeFoundClass(wordList) {
+  wordList.querySelectorAll('li').forEach((word) => {
+    word.classList.remove('found');
+  });
+}
+
+function updateSelectedCellsAfterWrongWordSubmission(word) {
+  const lastSelectedWordCells = selectedCells.slice(-word.length);
+
+  lastSelectedWordCells.forEach((cell) => {
+    cell.classList.remove('selected');
+  });
+  selectedCells = selectedCells.slice(0, -word.length);
+}
+
 function addCellToSelection(cell) {
   const { row, col } = cell.dataset;
 
@@ -114,8 +115,17 @@ function addCellToSelection(cell) {
   }
 }
 
-function handleCellClick(e) {
-  addCellToSelection(e.target);
+function handleFoundWord(foundWordIndex) {
+  wordsToFindList.children[foundWordIndex].classList.add('found');
+  highlightWord();
+  resetSelection();
+  checkWinCondition(wordsToFind);
+}
+
+function handleInvalidWord(word) {
+  selectedWord.textContent = 'Invalid word';
+  updateSelectedCellsAfterWrongWordSubmission(word);
+  currentSelection = [];
 }
 
 function onWordSubmit() {
@@ -128,23 +138,20 @@ function onWordSubmit() {
   const foundWordIndex = wordsToFind.findIndex((w) => word.toLowerCase() === w.toLowerCase());
 
   if (foundWordIndex > -1) {
-    wordsToFindList.children[foundWordIndex].classList.add('found');
-    highlightWord();
-    resetSelection();
-    checkWinCondition(wordsToFind);
+    handleFoundWord(foundWordIndex);
   } else {
-    selectedWord.textContent = 'Invalid word';
-    removeSelectedClass(word);
-    currentSelection = [];
+    handleInvalidWord(word);
   }
+}
+
+function renderUi() {
+  const grid = generateWordSearchGrid(14, wordsToFind);
+  renderWordSearchGrid(grid);
+  renderWordsToFind(wordsToFind);
+  categoryEl.textContent = category;
 }
 
 submitWordBtn.addEventListener('click', onWordSubmit);
 resetWordBtn.addEventListener('click', resetGame);
 
-document.addEventListener('DOMContentLoaded', () => {
-  const grid = generateWordSearchGrid(14, wordsToFind);
-  renderWordSearchGrid(grid);
-  renderWordsToFind(wordsToFind);
-  categoryEl.textContent = category;
-});
+document.addEventListener('DOMContentLoaded', renderUi);
