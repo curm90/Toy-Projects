@@ -228,31 +228,31 @@ const getRandomWordAny = () => {
   };
 };
 
-// Get a random word with specific difficulty but random category
-const getRandomWordByDifficulty = (difficulty) => {
-  const category = getRandomCategory();
-  return {
-    word: getRandomWord(category, difficulty),
-    category: category,
-    difficulty: difficulty,
-  };
-};
+// // Get a random word with specific difficulty but random category
+// const getRandomWordByDifficulty = (difficulty) => {
+//   const category = getRandomCategory();
+//   return {
+//     word: getRandomWord(category, difficulty),
+//     category: category,
+//     difficulty: difficulty,
+//   };
+// };
 
-// Get a random word with specific category but random difficulty
-const getRandomWordByCategory = (category) => {
-  const difficulty = getRandomDifficulty();
-  return {
-    word: getRandomWord(category, difficulty),
-    category: category,
-    difficulty: difficulty,
-  };
-};
+// // Get a random word with specific category but random difficulty
+// const getRandomWordByCategory = (category) => {
+//   const difficulty = getRandomDifficulty();
+//   return {
+//     word: getRandomWord(category, difficulty),
+//     category: category,
+//     difficulty: difficulty,
+//   };
+// };
 
 // Validate if a category exists
-const isValidCategory = (category) => category in wordCategories;
+// const isValidCategory = (category) => category in wordCategories;
 
 // Validate if a difficulty exists
-const isValidDifficulty = (difficulty) => getDifficulties().includes(difficulty);
+// const isValidDifficulty = (difficulty) => getDifficulties().includes(difficulty);
 
 export {
   wordCategories,
@@ -262,8 +262,4 @@ export {
   getRandomDifficulty,
   getRandomWord,
   getRandomWordAny,
-  getRandomWordByDifficulty,
-  getRandomWordByCategory,
-  isValidCategory,
-  isValidDifficulty,
 };
