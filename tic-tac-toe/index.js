@@ -24,7 +24,6 @@ function highlightWinningCells(cellsArray) {
 function checkIfWin(player) {
   for (const combination of winningCombinations) {
     const [a, b, c] = combination;
-    debugger;
     if (
       cells[a].textContent === player &&
       cells[b].textContent === player &&
@@ -76,12 +75,15 @@ function restartGame() {
     cell.textContent = '';
     cell.style.opacity = '';
     cell.style.color = '';
+    cell.style.cursor = 'pointer';
+    cell.removeEventListener('click', handleCellClick); // Remove to avoid duplicates
+    cell.addEventListener('click', handleCellClick); // Re-ad
   });
 
   currentPlayer = players[0];
   messageEl.textContent = "Player X's turn";
 }
 
-for (cell of cells) {
+cells.forEach((cell) => {
   cell.addEventListener('click', handleCellClick);
-}
+});
